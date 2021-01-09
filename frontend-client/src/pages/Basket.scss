@@ -1,0 +1,140 @@
+.Basket {
+	&__title {
+		text-transform: uppercase;
+		font-weight: 500;
+		text-align: center;
+		padding: 8px * 2 0;
+		border-bottom: 1px solid #d8d8d8;
+		letter-spacing: 0.2rem;
+	}
+	&__wrapper {
+		padding: 8px * 4 0;
+		display: flex;
+	}
+	&__items-container {
+		flex: 1;
+		margin-right: 8px * 3;
+	}
+	// Basket item
+	&__item {
+		display: flex;
+		border-bottom: 1px solid #d8d8d8;
+		margin-bottom: 8px * 2;
+		&-header {
+			display: flex;
+		}
+		&-title {
+			font-weight: 500;
+			flex: 1;
+		}
+		&-remove-btn {
+			border: none;
+			background: 0;
+			cursor: pointer;
+			&:hover > svg {
+				stroke: rgb(189, 0, 0);
+			}
+			&:focus {
+				outline: none;
+			}
+		}
+		&-img {
+			width: 150px;
+			img {
+				width: 100%;
+			}
+		}
+		&-content {
+			padding: 8px * 2;
+			flex: 1;
+		}
+		&-quantity {
+			margin-bottom: 8px * 2;
+			&-container {
+				display: grid;
+				grid-template: 40px / repeat(3, 40px);
+				grid-gap: 8px;
+				div {
+					border: 1px solid #d8d8d8;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+			}
+			&-title {
+				font-weight: 500;
+				margin-bottom: 8px;
+			}
+			&-add,
+			&-remove {
+				border: 2px solid #000;
+				background: none;
+				font-weight: 500;
+				font-size: 1.4rem;
+			}
+		}
+		&-availability {
+			margin-bottom: 8px * 2;
+		}
+		&-price {
+		}
+	}
+	&__checkout-card {
+		min-width: 360px;
+		padding: 8px * 3;
+		border: 1px solid #d8d8d8;
+		border-radius: 8px;
+		h4 {
+			font-size: 1.5rem;
+			font-weight: 500;
+			margin-bottom: 8px * 2;
+		}
+		p {
+			color: #bbb;
+		}
+		ul {
+			margin: 8px 0;
+			li {
+				list-style: none;
+				padding-left: 10px;
+				margin-bottom: 5px;
+				&::before {
+					content: "";
+					display: inline-block;
+					height: 20px;
+					width: 20px;
+					margin-bottom: -2px;
+					margin-right: 5px;
+					background-size: contain;
+					background-image: url("../assets/icons/check.svg");
+					background-repeat: none;
+				}
+			}
+		}
+		&-total {
+			border-top: 1px solid #d8d8d8;
+			margin-top: 8px * 2.5;
+			padding: 8px * 2.5 0;
+			display: grid;
+			grid-template-columns: auto max-content;
+			h3,
+			h4 {
+				word-wrap: unset;
+				margin: 0;
+				font-size: 1.1rem;
+				font-weight: 500;
+			}
+		}
+		&-btn {
+			width: 100%;
+			padding: 8px * 2 0;
+			border: none;
+			background: #000;
+			color: #fff;
+			font-weight: 500;
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}

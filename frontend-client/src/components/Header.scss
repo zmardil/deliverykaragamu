@@ -1,0 +1,148 @@
+.Header {
+	&__site-map {
+		background-color: #eee;
+		&-wrapper {
+			padding-top: 8px;
+			padding-bottom: 8px;
+			display: flex;
+			justify-content: flex-end;
+			a {
+				font-size: 0.7rem;
+				font-weight: 400;
+				text-decoration: none;
+				color: inherit;
+				margin-right: 8px;
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+
+	&__site-nav {
+		padding: 16px 0;
+		&-wrapper {
+			display: grid;
+			grid-template: 70px / 70px 1fr auto;
+			grid-gap: 16px;
+		}
+		&-search {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			&-wrapper {
+				background: #fff;
+				width: 100%;
+				max-width: 500px;
+				border: 2px solid #000;
+				display: grid;
+				grid-template: 40px / auto 40px;
+				overflow: hidden;
+				position: relative;
+				&::after {
+					content: url(../assets/icons/search.svg);
+					display: absolute;
+					display: grid;
+					align-content: center;
+					justify-content: center;
+					width: 40px;
+					height: 40px;
+				}
+			}
+			input[type="search"] {
+				outline: none;
+				border: none;
+				padding-left: 10px;
+				font-weight: 1.1rem;
+				&::placeholder {
+					font-family: Barlow;
+				}
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+		&-profile-nav {
+			display: grid;
+			align-content: center;
+			justify-content: center;
+			grid-template: 25px / auto repeat(2, 25px);
+			grid-gap: 16px;
+			.signin {
+				color: inherit;
+				text-decoration: none;
+				font-size: 0.9rem;
+				font-weight: 500;
+				align-self: center;
+			}
+			.menu {
+				display: none;
+			}
+		}
+	}
+	&__logo {
+		width: 70px;
+		height: 70px;
+		object-fit: contain;
+	}
+	&__nav {
+		border-top: 1px solid #d8d8d8;
+		border-bottom: 1px solid #d8d8d8;
+		&-close-btn {
+			display: none;
+		}
+		.container {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: -1px;
+		}
+		a {
+			text-decoration: none;
+			color: inherit;
+			transition: border 0.5s ease;
+			padding: 10px 0;
+			&:hover {
+				border-bottom: 1px solid #000;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.Header {
+		&__site-nav {
+			&-profile-nav {
+				grid-template: 25px / auto repeat(3, 25px);
+				.menu {
+					display: inline-block;
+				}
+			}
+		}
+		&__nav {
+			display: none;
+		}
+		&__nav.open {
+			border: none;
+			display: block;
+			position: absolute;
+			z-index: 2;
+			background: #fff;
+			top: 0;
+			right: 0;
+			padding: 8px;
+			.Header__nav-close-btn {
+				display: inline;
+			}
+			.container {
+				width: 300px;
+				height: 100vh;
+				display: block;
+				margin: 0;
+			}
+			a {
+				border-bottom: 1px solid #d8d8d8;
+				display: block;
+			}
+		}
+	}
+}

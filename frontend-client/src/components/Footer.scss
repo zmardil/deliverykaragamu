@@ -1,0 +1,135 @@
+.Footer {
+	background-color: #f2f2f2;
+	&__banner {
+		border-top: 1px solid #d8d8d8;
+		&-wrapper {
+			padding: (8px * 6) 0;
+			text-align: center;
+		}
+		&-title {
+			font-weight: 500;
+			font-size: 1.1rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1rem;
+			margin-bottom: 8px;
+		}
+		&-description {
+			margin-bottom: 32px;
+		}
+		&-cta {
+			border: 2px solid #000;
+			color: inherit;
+			display: inline-block;
+			padding: 16px 32px;
+			text-decoration: none;
+			font-weight: 500;
+		}
+	}
+	&__slogan {
+		border-top: 1px solid #d8d8d8;
+		&-wrapper {
+			padding: (8px * 6) 0;
+			text-align: center;
+			text-transform: uppercase;
+			a {
+				text-decoration: none;
+				font-weight: 500;
+				color: inherit;
+				span {
+					font-weight: 300;
+				}
+			}
+		}
+	}
+	&__nav {
+		border-top: 1px solid #d8d8d8;
+		&-wrapper {
+			padding: 8px * 6 8px * 2;
+			column-count: 4;
+			column-gap: 24px;
+			// display: grid;
+			// grid-template: 600px / repeat(4, 1fr);
+			// grid-gap: 24px;
+			nav {
+				margin-bottom: 24px;
+				h4 {
+					font-weight: 500;
+					border-bottom: 1px solid #d8d8d8;
+					padding-bottom: 8px;
+					margin-bottom: 8px;
+				}
+				a {
+					text-decoration: none;
+					color: inherit;
+					display: block;
+					padding: 8px 0;
+					font-size: 0.9rem;
+					color: #999;
+					&:hover {
+						color: #333;
+					}
+				}
+				.cta {
+					border: 2px solid #000;
+					color: inherit;
+					display: inline-block;
+					padding: 8px 16px;
+					text-decoration: none;
+					font-weight: 500;
+					margin-top: 24px;
+				}
+			}
+		}
+	}
+	&__socials {
+		border-top: 1px solid #d8d8d8;
+		&-wrapper {
+			padding: (8px * 4) 0;
+			text-align: center;
+			a {
+				margin-right: 80px;
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+	&__copyrights {
+		border-top: 1px solid #d8d8d8;
+		&-wrapper {
+			padding: (8px * 2) 0;
+			text-align: center;
+			font-size: 0.8rem;
+		}
+	}
+}
+
+@media only screen and (max-width: 1300px) {
+	.Footer {
+		&__nav {
+			&-wrapper {
+				column-count: 3;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 770px) {
+	.Footer {
+		&__nav {
+			&-wrapper {
+				column-count: 2;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.Footer {
+		&__nav {
+			&-wrapper {
+				column-count: auto;
+			}
+		}
+	}
+}

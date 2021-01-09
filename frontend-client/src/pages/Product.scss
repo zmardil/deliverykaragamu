@@ -1,0 +1,156 @@
+.Product {
+	&__wrapper {
+		margin-top: 8px * 2;
+		margin-bottom: 8px * 2;
+	}
+	&__header {
+		display: flex;
+	}
+	&__img-wrapper {
+		flex: 1;
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: max-content;
+		grid-gap: 8px * 2;
+	}
+	&__img {
+		img {
+			object-fit: cover;
+			width: 100%;
+		}
+		&:nth-child(1) {
+			grid-column: span 3;
+		}
+		&:nth-child(2) {
+			grid-column: span 3;
+		}
+		&:nth-child(3) {
+			grid-column: span 2;
+		}
+		&:nth-child(4) {
+			grid-column: span 2;
+		}
+		&:nth-child(5) {
+			grid-column: span 2;
+		}
+	}
+	&__primary-desc {
+		width: 350px;
+		padding-left: 8px * 2;
+		margin-bottom: 8px * 2;
+	}
+	&__title {
+		font-size: 1.2rem;
+		font-weight: 300;
+	}
+	&__price {
+		font-weight: 500;
+		margin-bottom: 8px;
+	}
+	&__discount {
+		color: #e40000;
+	}
+	&__delivery {
+		margin-top: 8px;
+		padding: 8px 0;
+		border-top: 1px solid #d8d8d8;
+		border-bottom: 1px solid #d8d8d8;
+		a {
+			color: inherit;
+			font-weight: 500;
+			font-size: 0.9rem;
+		}
+	}
+	&__tag {
+		padding: 12px;
+		background: #d8d8d8;
+		margin-top: 8px;
+		&-title {
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+		&-desc {
+			font-size: 0.9rem;
+		}
+	}
+	&__colors {
+		margin-top: 16px;
+		&-title {
+			span {
+				font-weight: 500;
+			}
+		}
+		&-wrapper {
+			list-style-type: none;
+			margin-top: 8px;
+			display: grid;
+			grid-template: 40px / repeat(2, 1fr);
+			grid-gap: 10px;
+		}
+	}
+	&__color {
+		padding: 10px;
+		padding-left: 40px;
+		position: relative;
+		border: 1px solid #d8d8d8;
+		&:last-child {
+			&::after {
+				background: brown;
+			}
+		}
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 20px;
+			height: 20px;
+			background: black;
+			border-radius: 100%;
+			top: 10px;
+			left: 10px;
+		}
+	}
+	&__sizes {
+		margin-top: 8px * 2;
+		&-wrapper {
+			margin-top: 8px;
+			list-style-type: none;
+			display: grid;
+			grid-template: 50px / repeat(auto-fit, 50px);
+			grid-gap: 10px;
+		}
+	}
+	&__size {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid #d8d8d8;
+	}
+	&__availability {
+		margin-top: 8px * 2;
+	}
+	&__add-to-cart-btn {
+		padding: 8px * 2;
+		background: #000;
+		width: 100%;
+		display: inline-block;
+		border: none;
+		color: white;
+		margin-top: 8px * 2;
+	}
+	&__footer {
+	}
+	&__secondary-desc {
+	}
+}
+
+@media only screen and (max-width: 950px) {
+	.Product {
+		&__header {
+			display: block;
+		}
+		&__primary-desc {
+			width: 100%;
+		}
+	}
+}

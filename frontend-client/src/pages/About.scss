@@ -1,0 +1,157 @@
+.About {
+	&__nav {
+		margin: 32px 0;
+		&-wrapper {
+			display: grid;
+			grid-template: 24px / repeat(4, 1fr);
+			align-items: center;
+			justify-items: center;
+			a {
+				color: inherit;
+				text-transform: uppercase;
+				font-weight: 500;
+			}
+		}
+	}
+	.commitment {
+		&__wrapper {
+			background-color: #f2f2f2;
+			padding: 4rem;
+			margin: 4rem;
+			h4 {
+				text-transform: uppercase;
+				font-size: 4rem;
+				text-align: center;
+				line-height: 0.7em;
+				margin-bottom: 32px;
+				letter-spacing: 1.2rem;
+				span {
+					font-weight: 300;
+					font-size: 2rem;
+				}
+			}
+			p {
+				font-weight: 500;
+				text-align: center;
+				line-height: 1.7em;
+				font-size: 1.5rem;
+				margin-bottom: 32px;
+				padding: 0 6rem;
+			}
+			.greyed {
+				margin-bottom: 0;
+				color: #717171;
+			}
+		}
+	}
+	.section {
+		&__banner {
+			background-image: url("../assets/banners/about-us-services-bnr-img-290818-desk.jfif");
+			background-position: center center;
+			padding: 3.5rem;
+			background-repeat: no-repeat;
+			background-size: cover;
+			&-title {
+				text-align: center;
+				font-weight: 500;
+				font-size: 1.7rem;
+				text-transform: uppercase;
+				letter-spacing: 0.2em;
+				color: #fff;
+			}
+		}
+		&__content {
+			&-wrapper {
+				margin-top: 5rem;
+				margin-bottom: 6rem;
+				display: grid;
+				grid-gap: 3rem;
+				grid-template: auto / repeat(auto-fit, minmax(200px, 400px));
+				justify-content: center;
+				&:nth-child(even) {
+					.section__content-desc {
+						grid-column: 1 / 2;
+						order: 1;
+						justify-self: right;
+					}
+					.section__content-img {
+						grid-column: 2 / 3;
+						order: 2;
+						justify-self: left;
+					}
+				}
+			}
+			&-img {
+				justify-self: right;
+				img {
+					width: 100%;
+				}
+			}
+			&-desc {
+				width: 100%;
+				justify-self: left;
+				h4 {
+					font-weight: 500;
+					text-transform: uppercase;
+					font-size: 1.5rem;
+					line-height: 1.5em;
+					margin-bottom: 1.4rem;
+					letter-spacing: 0.05rem;
+				}
+				h5 {
+					font-weight: 500;
+					text-transform: uppercase;
+					font-size: 1.5rem;
+					margin-bottom: 5px;
+					display: inline-block;
+					padding-bottom: 5px;
+					border-bottom: 3px solid #01b044;
+				}
+				h6 {
+					font-size: 1rem;
+					font-weight: 500;
+					color: #7c7c7c;
+					margin-bottom: 1rem;
+				}
+				p {
+					margin-bottom: 1rem;
+				}
+				a {
+					color: inherit;
+					display: block;
+					color: #7c7c7c;
+					margin-bottom: 1rem;
+				}
+			}
+		}
+	}
+	.more-from-us {
+		&__wrapper {
+			background: #f7f7f7;
+			padding: 3rem 0;
+		}
+		&__title {
+			text-align: center;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			font-weight: 500;
+		}
+		&__content {
+			max-width: 700px;
+			width: 100%;
+			margin: 0 auto;
+			text-align: center;
+			line-height: 2rem;
+			h4 {
+				font-size: 1.6rem;
+				margin-bottom: 2rem;
+				font-weight: 500;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+			}
+			p {
+				font-size: 1.3rem;
+			}
+		}
+	}
+}
