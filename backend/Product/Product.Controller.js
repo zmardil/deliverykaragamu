@@ -52,6 +52,20 @@ var ProductController = function () {
 						})
 					})
 			})
+		} else if (query === 'category') {
+			return new Promise((resolve, reject) => {
+				Products.find()
+					.distinct('Category1')
+					.then(data => {
+						resolve({ status: 200, message: data })
+					})
+					.catch(err => {
+						reject({
+							status: 500,
+							message: 'No data to be found. Error: ' + err,
+						})
+					})
+			})
 		} else {
 			return new Promise((resolve, reject) => {
 				Products.find({ Title: /query/ })
