@@ -4,25 +4,19 @@ import { Link } from 'react-router-dom'
 import Logo from '../assets/logo.jpg'
 import { User, ShoppingCart, Menu, X } from 'react-feather'
 import { connect } from 'react-redux'
-import { fetchData } from '../actions/products'
+import { fetchCategories } from '../actions/products'
 
 const mapStateToProps = state => ({
-	cat: state.categories,
+	categories: state.products.categories,
 })
 
-function Header({ dispatch, cat }) {
+const mapDispatchToProps = { fetchCategories }
+
+function Header({ dispatch, categories, fetchCategories }) {
 	const [menuOpen, setMenuOpen] = useState(false)
-	const [categories, setCategories] = useState([])
 
 	useEffect(() => {
-		;(async () => {
-			await fetch('http://localhost:8080/products/filter/category')
-				.then(res => res.json())
-				.then(data => {
-					setCategories(data)
-				})
-		})()
-		// dispatch(fetchData())
+		fetchCategories()
 	}, [])
 
 	return (
@@ -49,13 +43,13 @@ function Header({ dispatch, cat }) {
 						</div>
 					</div>
 					<nav className='Header__site-nav-profile-nav'>
-						<Link className='signin' to='/signin'>
+						<Link className='login' to='/login'>
 							Sign In
 						</Link>
 						<Link to='/'>
 							<User color='black' />
 						</Link>
-						<Link to='basket'>
+						<Link to='/basket'>
 							<ShoppingCart color='black' />
 						</Link>
 						<Link className='menu' onClick={() => setMenuOpen(!menuOpen)}>
@@ -79,4 +73,4 @@ function Header({ dispatch, cat }) {
 	)
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

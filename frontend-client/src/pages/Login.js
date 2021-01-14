@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import './SignIn.scss'
+import './Login.scss'
 import axios from 'axios'
 
-export default class UserLogin extends Component {
+export default class Login extends Component {
 	constructor(props) {
 		super(props)
 
@@ -69,10 +69,10 @@ export default class UserLogin extends Component {
 
 	render() {
 		return (
-			<main className='SignIn'>
-				<h2 className='SignIn__title'>Sign In</h2>
-				<section className='SignIn__form-wrapper'>
-					<form className='SignIn__form' onSubmit={this.onSubmit}>
+			<main className='LogIn'>
+				<h2 className='LogIn__title'>Sign In</h2>
+				<section className='Login__form-wrapper'>
+					<form className='Login__form' onSubmit={this.onSubmit}>
 						<label htmlFor='email'>Email</label>
 						<input
 							type='email'
