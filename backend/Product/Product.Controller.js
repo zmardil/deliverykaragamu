@@ -68,7 +68,7 @@ var ProductController = function () {
 			})
 		} else {
 			return new Promise((resolve, reject) => {
-				Products.find({ Title: /query/ })
+				Products.fuzzySearch(query)
 					.then(data => {
 						resolve({ status: 200, message: data })
 					})

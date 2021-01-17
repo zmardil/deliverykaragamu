@@ -1,17 +1,43 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './CreateAccount.scss'
 
 function CreateAccount() {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const handleSubmit = e => {
+		e.preventDefault()
+		axios
+			.post(
+				'http://localhost:8080/users',
+				{ email, password },
+				{ withCredentials: true }
+			)
+			.then(obj => alert('success'))
+	}
+
 	return (
 		<main className='CreateAccount'>
 			<h2 className='CreateAccount__title'>Create an Accounct</h2>
 			<section className='CreateAccount__form-wrapper'>
-				<form className='CreateAccount__form'>
+				<form className='CreateAccount__form' onSubmit={handleSubmit}>
 					<label htmlFor='email'>Email</label>
-					<input type='email' name='email' id='email' />
+					<input
+						type='email'
+						name='email'
+						id='email'
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+					/>
 					<label htmlFor='password'>Password</label>
-					<input type='password' name='password' id='password' />
+					<input
+						type='password'
+						name='password'
+						id='password'
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+					/>
 					<button type='submit'>Create account</button>
 				</form>
 				<p>

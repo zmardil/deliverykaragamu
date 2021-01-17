@@ -1,49 +1,80 @@
-import React from "react";
-import "./Basket.scss";
-import { Link } from "react-router-dom";
-import ShoeImg from "../assets/products/004071584.jfif";
-import { Trash } from "react-feather";
+import React, { useEffect, useState } from 'react'
+import './Basket.scss'
+import { Link } from 'react-router-dom'
+import ShoeImg from '../assets/products/004071584.jfif'
+import { Trash } from 'react-feather'
+import { connect } from 'react-redux'
+import { addCartItem, removeCartItem, fetchCart } from '../actions/user'
+import axios from 'axios'
 
-function Basket() {
+const mapStateToProps = state => ({
+	user: state.user.user,
+	cart: state.user.cart,
+})
+
+const mapDispatchToProps = { fetchCart, addCartItem, removeCartItem }
+
+function Basket({ user, cart, ...props }) {
+	useEffect(() => {
+		fetchCart(user._id)
+	}, [])
+
 	return (
-		<main className="Basket">
-			<div className="container">
-				<h4 className="Basket__title">Basket</h4>
-				<div className="Basket__wrapper">
-					<div className="Basket__items-container">
-						<div className="Basket__item">
-							<div className="Basket__item-img">
-								<img src={ShoeImg} alt="" />
-							</div>
-							<div className="Basket__item-content">
-								<div className="Basket__item-header">
-									<h4 className="Basket__item-title">
-										Timberland Earthkeeper Stormbucks Leather Shes Tan 7
-									</h4>
-									<button className="Basket__item-remove-btn">
-										<Trash color="black" size={20} />
-									</button>
-								</div>
-								<p className="Basket__item-availability">
-									Currently in stock online
-								</p>
-								<div className="Basket__item-footer">
-									<div className="Basket__item-quantity">
-										<p className="Basket__item-quantity-title">Quantity</p>
-										<div className="Basket__item-quantity-container">
-											<button className="Basket__item-quantity-remove">
-												-
+		<main className='Basket'>
+			<div className='container'>
+				<h4 className='Basket__title'>Basket</h4>
+				<div className='Basket__wrapper'>
+					<div className='Basket__items-container'>
+						{cart.length === 0 && <p>No items in cart</p>}
+						{cart &&
+							cart.map(item => (
+								<div className='Basket__item'>
+									<div className='Basket__item-img'>
+										<img
+											src={`http://localhost:8080/${item.Img4Path}`}
+											alt={item.Name}
+										/>
+									</div>
+									<div className='Basket__item-content'>
+										<div className='Basket__item-header'>
+											<h4 className='Basket__item-title'>{item.Name}</h4>
+											<button className='Basket__item-remove-btn'>
+												<Trash color='black' size={20} />
 											</button>
-											<div>3</div>
-											<button className="Basket__item-quantity-add">+</button>
+										</div>
+										<p className='Basket__item-availability'>
+											{item.stock
+												? 'Currently in stock online'
+												: 'Currently not available'}
+										</p>
+										<div className='Basket__item-footer'>
+											<div className='Basket__item-quantity'>
+												<p className='Basket__item-quantity-title'>Quantity</p>
+												<div className='Basket__item-quantity-container'>
+													<button
+														className='Basket__item-quantity-remove'
+														onClick={addCartItem(item._id)}
+													>
+														-
+													</button>
+													<div>{item.qty}</div>
+													<button
+														className='Basket__item-quantity-add'
+														onClick={removeCartItem(item._id)}
+													>
+														+
+													</button>
+												</div>
+											</div>
+											<p className='Basket__item-price'>
+												LKR {item.Price * item.qty}
+											</p>
 										</div>
 									</div>
-									<p className="Basket__item-price">LKR 12,000.0</p>
 								</div>
-							</div>
-						</div>
+							))}
 					</div>
-					<div className="Basket__checkout-card">
+					<div className='Basket__checkout-card'>
 						<h4>Summary</h4>
 						<p>Your order qualifies for</p>
 						<ul>
@@ -51,18 +82,18 @@ function Basket() {
 							<li>Free Click & Collect Order before 4pm</li>
 						</ul>
 						<p>Main delivery options at checkout</p>
-						<div className="Basket__checkout-card-total">
+						<div className='Basket__checkout-card-total'>
 							<h3>Total (excluding delivery)</h3>
 							<h4>LKR 70000.00</h4>
 						</div>
-						<button className="Basket__checkout-card-btn">
+						<button className='Basket__checkout-card-btn'>
 							Continue to checkout
 						</button>
 					</div>
 				</div>
 			</div>
 		</main>
-	);
+	)
 }
 
-export default Basket;
+export default connect(mapStateToProps, mapDispatchToProps)(Basket)

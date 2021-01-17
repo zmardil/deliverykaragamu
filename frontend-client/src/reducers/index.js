@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import { products } from './products'
+import { store } from './store'
+import { user } from './user'
 
 export default combineReducers({
-	products,
+	store,
+	user,
 })

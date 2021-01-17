@@ -4,19 +4,28 @@ import { Link } from 'react-router-dom'
 import Logo from '../assets/logo.jpg'
 import { User, ShoppingCart, Menu, X } from 'react-feather'
 import { connect } from 'react-redux'
-import { fetchCategories } from '../actions/products'
+import { fetchCategories, fetchProducts } from '../actions/products'
 
 const mapStateToProps = state => ({
-	categories: state.products.categories,
+	categories: state.store.categories,
+	products: state.store.products,
 })
 
-const mapDispatchToProps = { fetchCategories }
+const mapDispatchToProps = { fetchCategories, fetchProducts }
 
-function Header({ dispatch, categories, fetchCategories }) {
+function Header({
+	dispatch,
+	categories,
+	products,
+	fetchCategories,
+	fetchProducts,
+}) {
 	const [menuOpen, setMenuOpen] = useState(false)
+	const [searchText, setSearchText] = useState('')
 
 	useEffect(() => {
 		fetchCategories()
+		fetchProducts()
 	}, [])
 
 	return (
@@ -39,7 +48,22 @@ function Header({ dispatch, categories, fetchCategories }) {
 								type='search'
 								aria-label='Search product or brand'
 								placeholder='Search product or brand'
+								value={searchText}
+								onChange={e => {
+									setSearchText(e.target.value)
+								}}
 							/>
+							{searchText.trim() && (
+								<div className='Header__site-nav-search-list'>
+									{products
+										.filter(product => product.Name.search(searchText) !== -1)
+										.map(product => (
+											<Link to={`/product/${product.slug}`}>
+												{product.Name}
+											</Link>
+										))}
+								</div>
+							)}
 						</div>
 					</div>
 					<nav className='Header__site-nav-profile-nav'>
@@ -64,8 +88,10 @@ function Header({ dispatch, categories, fetchCategories }) {
 						className='Header__nav-close-btn'
 						onClick={() => setMenuOpen(false)}
 					/>
-					{categories.map(category => (
-						<Link to='/archive'>{category}</Link>
+					{categories.map((category, id) => (
+						<Link to='/archive' key={id}>
+							{category}
+						</Link>
 					))}
 				</div>
 			</nav>

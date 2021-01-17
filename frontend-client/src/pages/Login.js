@@ -1,108 +1,75 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Login.scss'
-import axios from 'axios'
 
-export default class Login extends Component {
-	constructor(props) {
-		super(props)
+import { connect } from 'react-redux'
+import { logIn } from '../actions/user'
 
-		this.onChangeEmail = this.onChangeEmail.bind(this)
-		this.onChangePassword = this.onChangePassword.bind(this)
-		this.onSubmit = this.onSubmit.bind(this)
+const mapStateToProps = state => ({
+	user: state.user,
+})
 
-		this.state = {
-			email: '',
-			password: '',
-		}
+const mapDispatchToProps = { logIn }
+
+const Login = ({ logIn, user, ...props }) => {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [error, setError] = useState(false)
+
+	const onLoginSuccess = x => {
+		console.log(x)
+		setError(true)
+		props.history.push('/archive')
 	}
 
-	onChangeEmail(e) {
-		this.setState({
-			email: e.target.value,
-		})
+	const onLoginFailure = x => {
+		setError(true)
 	}
 
-	onChangePassword(e) {
-		this.setState({
-			password: e.target.value,
-		})
-	}
-
-	onSubmit(e) {
+	const handleSubmit = e => {
 		e.preventDefault()
-		let loginResponse = ''
-		try {
-			const loginDetails = {
-				email: this.state.email,
-				pw: this.state.password,
-			}
-
-			const config = {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-
-			axios
-				.post('http://localhost:8080/users/login', loginDetails, config)
-				.then(({ data }) => {
-					loginResponse = data
-					console.log(data)
-					localStorage.setItem('userType', loginResponse[0].type)
-					localStorage.setItem('userName', loginResponse[0].firstName)
-					localStorage.setItem('userId', loginResponse[0]._id)
-
-					if (loginResponse[0].type == 'admin') {
-						console.log('admin')
-						window.location.replace('/inventory')
-					} else {
-						//window.location.replace("/items");
-					}
-				})
-
-			//window.location = "items";
-		} catch (err) {
-			console.log(err)
-		}
+		logIn({ email, password }).then(onLoginSuccess, onLoginFailure)
 	}
 
-	render() {
-		return (
-			<main className='LogIn'>
-				<h2 className='LogIn__title'>Sign In</h2>
-				<section className='Login__form-wrapper'>
-					<form className='Login__form' onSubmit={this.onSubmit}>
-						<label htmlFor='email'>Email</label>
-						<input
-							type='email'
-							name='email'
-							id='email'
-							onChange={this.onChangeEmail}
-						/>
-						<label htmlFor='password'>Password</label>
-						<input
-							type='password'
-							name='password'
-							id='password'
-							onChange={this.onChangePassword}
-						/>
-						<button type='submit'>Sign In</button>
-					</form>
-					<Link className='fyp-link' to='/'>
-						Forgotten your password?
-					</Link>
-					<p>
-						We treat your personal data with care,please find our
-						<a hre='#'>privacy notice</a> here.
-					</p>
-					<hr />
-					<div className='create-account'>
-						<h3>Don't have an account?</h3>
-						<Link to='/CreateAccount'>Create an account</Link>
-					</div>
-				</section>
-			</main>
-		)
-	}
+	return (
+		<main className='LogIn'>
+			<h2 className='LogIn__title'>Sign In</h2>
+			<section className='LogIn__form-wrapper'>
+				<form className='LogIn__form' onSubmit={handleSubmit}>
+					<label htmlFor='email'>Email</label>
+					<input
+						type='email'
+						name='email'
+						id='email'
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+					/>
+					<label htmlFor='password'>Password</label>
+					<input
+						type='password'
+						name='password'
+						id='password'
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+					/>
+					<button type='submit'>Sign In</button>
+				</form>
+				<Link className='fyp-link' to='/'>
+					Forgotten your password?
+				</Link>
+				<p>
+					We treat your personal data with care,please find our
+					<a hre='#'>privacy notice</a> here.
+				</p>
+				{error && <p>login failed</p>}
+				<hr />
+				<div className='create-account'>
+					<h3>Don't have an account?</h3>
+					<Link to='/signup'>Create an account</Link>
+				</div>
+			</section>
+		</main>
+	)
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

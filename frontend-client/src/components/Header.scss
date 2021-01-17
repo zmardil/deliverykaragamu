@@ -37,7 +37,6 @@
 				border: 2px solid #000;
 				display: grid;
 				grid-template: 40px / auto 40px;
-				overflow: hidden;
 				position: relative;
 				&::after {
 					content: url(../assets/icons/search.svg);
@@ -59,6 +58,24 @@
 				}
 				&:focus {
 					outline: none;
+				}
+			}
+			&-list {
+				position: absolute;
+				top: 42px;
+				width: 100%;
+				background: #fff;
+				border: 1px solid #ddd;
+				box-shadow: 0 0 4px 0 #00000024;
+				a {
+					display: block;
+					padding: 10px;
+					border-bottom: 1px solid #000;
+					text-decoration: none;
+					color: inherit;
+					&:last-child {
+						border-bottom: none;
+					}
 				}
 			}
 		}
