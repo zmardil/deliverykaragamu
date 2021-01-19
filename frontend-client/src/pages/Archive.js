@@ -16,17 +16,17 @@ const mapDispatchToProps = { addToCart }
 
 const Archive = ({ user, addToCart, ...props }) => {
 	const [items, setItems] = useState([])
+	// refactor
 	useEffect(() => {
 		axios
 			.get('http://localhost:8080/products/filter/all')
 			.then(({ data }) => {
 				if (data.length > 0) {
-					console.log(data)
 					setItems(data)
 				}
 			})
 			.catch(error => {
-				console.log(error)
+				// handle error
 			})
 	}, [])
 
@@ -102,7 +102,7 @@ const Archive = ({ user, addToCart, ...props }) => {
 							{items &&
 								items.map(item => (
 									<div className='Archive__item' key={item._id}>
-									{console.log(item._id)}
+										{console.log(item._id)}
 										<div className='Archive__item-img'>
 											<img
 												src={`http://localhost:8080/${item.Img4Path}`}
@@ -113,7 +113,7 @@ const Archive = ({ user, addToCart, ...props }) => {
 													onClick={e => {
 														console.log('clicked')
 														user
-															? addToCart(item._id, user)
+															? addToCart(item._id)
 															: props.history.push('login')
 													}}
 												>

@@ -1,7 +1,7 @@
 import { ADD_TO_CART } from '../actions/user'
 import { ADD_CART_ITEM } from '../actions/user'
 import { REMOVE_CART_ITEM } from '../actions/user'
-import { FETCH_CART } from '../actions/user'
+import { SET_CART } from '../actions/user'
 import { LOG_IN } from '../actions/user'
 
 const initialState = {
@@ -13,7 +13,7 @@ export function user(state = initialState, action) {
 	switch (action.type) {
 		case LOG_IN:
 			return { ...state, user: action.payload }
-		case FETCH_CART:
+		case SET_CART:
 			return { ...state, cart: action.payload }
 		case ADD_TO_CART:
 			return { ...state, cart: action.payload }

@@ -35,7 +35,7 @@ export default class UserLogin extends Component {
 		try {
 			const loginDetails = {
 				email: this.state.email,
-				pw: this.state.password,
+				password: this.state.password,
 			}
 
 			const config = {

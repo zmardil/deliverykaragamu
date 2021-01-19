@@ -47,5 +47,6 @@
 			"last 1 safari version"
 		]
 	},
-	"homepage": "https://www.deliverykaragamu.com/"
+	"homepage": "https://www.deliverykaragamu.com/",
+	"proxy": "http://localhost:8080"
 }

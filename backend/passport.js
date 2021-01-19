@@ -1,4 +1,4 @@
-const User = require('./DBSchema/SchemaMapper').model('users')
+const User = require('./db/schema').model('users')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const localStrategy = require('passport-local').Strategy
@@ -6,7 +6,6 @@ const localStrategy = require('passport-local').Strategy
 const strategy = new localStrategy(
 	{ usernameField: 'email' },
 	(email, password, done) => {
-		console.log(email, password)
 		User.findOne({ email: email }, (err, user) => {
 			if (err) return done(err)
 			if (!user) return done(null, false)
@@ -27,13 +26,13 @@ const strategy = new localStrategy(
 // })
 
 passport.serializeUser((user, done) => {
-	done(null, { _id: _id })
+	done(null, { _id: user._id })
 })
 
 passport.deserializeUser((id, done) => {
 	User.findOne({ _id: id }, 'email', (err, user) => {
 		done(null, user)
-	})
+	}).catch(err => done(err))
 })
 
 module.exports = passport.use(strategy)

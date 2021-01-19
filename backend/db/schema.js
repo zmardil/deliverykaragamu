@@ -134,11 +134,11 @@ const UserSchema = new mongoose.Schema({
 	},
 	cart: [
 		{
-			productId: {
+			_id: {
 				type: mongoose.Schema.Types.ObjectId,
 				ref: 'products',
 				required: true,
-				unique: true
+				unique: true,
 			},
 			qty: {
 				type: Number,
@@ -169,31 +169,8 @@ ProductSchema.plugin(mongooseFuzzySearching, {
 	fields: ['Name', 'Category1', 'Description', 'Category2'],
 })
 
-mongoose.model('products', ProductSchema)
-mongoose.model('purchases', PurchaseSchema)
-mongoose.model('users', UserSchema)
-
-const MONGO_URI =
-	process.env.MONGO_URI ||
-	'mongodb+srv://developer:dev@cluster0.ypsev.mongodb.net/products?retryWrites=true&w=majority'
-
-mongoose
-	.connect(MONGO_URI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: true,
-	})
-	.then(() => {
-		console.log('Connected to DB')
-	})
-	.catch(err => {
-		console.error(err)
-	})
-
-// mongoose.connect('mongodb+srv://user:user@cluster0.ypsev.mongodb.net/products?retryWrites=true&w=majority',{useNewUrlParser:true,useUnifiedTopology: true}).then(()=>{
-//     console.log('Connected to DB');
-// }).catch((err)=>{
-//    console.error(err);
-// });
+const Products = mongoose.model('products', ProductSchema)
+const Purchases = mongoose.model('purchases', PurchaseSchema)
+const Users = mongoose.model('users', UserSchema)
 
 module.exports = mongoose

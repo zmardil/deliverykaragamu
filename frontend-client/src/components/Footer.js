@@ -27,7 +27,7 @@ function Footer() {
 					<nav>
 						<h4>Help</h4>
 						<Link to="/">Customer services</Link>
-						<Link to="about">About us</Link>
+						<Link to="/about">About us</Link>
 						<Link to="/">Never Knowingly Undersold</Link>
 						<Link to="/">Our shops</Link>
 						<Link to="/">Our services</Link>
@@ -50,7 +50,7 @@ function Footer() {
 					</nav>
 					<nav>
 						<h4>Shopping</h4>
-						<Link to="archive">All Products</Link>
+						<Link to="/archive">All Products</Link>
 						<Link to="/">Buying guides</Link>
 						<Link to="/">My John Lewis</Link>
 						<Link to="/">The Edit</Link>

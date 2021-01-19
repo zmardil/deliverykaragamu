@@ -1,7 +1,10 @@
-var express = require('express')
+const express = require('express')
 const passport = require('../passport')
-var router = express.Router()
-var UsersController = require('./User.Controller')
+const router = express.Router()
+const UsersController = require('./User.Controller')
+const { isAdmin, isAuth } = require('../middleware/auth')
+
+const log = console.log
 
 router.post('/', (req, res) => {
 	UsersController.Insert(req.body)
@@ -14,17 +17,21 @@ router.post('/', (req, res) => {
 })
 
 router.post('/login', (req, res, next) => {
-	console.log(req.body)
 	passport.authenticate('local', (err, user) => {
 		if (err) return next(err)
 		if (!user) return res.status(401)
 		req.logIn(user, () => {
-			res.json({ _id: user._id, email: user.email })
+			res.json({ _id: user._id, email: user.email, type: user.type })
 		})
 	})(req, res, next)
 })
 
+router.get('/logout', (req, res) => {
+	req.logout()
+})
+
 router.post('/cart', UsersController.addToCart)
+
 router.get('/cart', UsersController.getCart)
 
 router.get('/', (req, res) => {

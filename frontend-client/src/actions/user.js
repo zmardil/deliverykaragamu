@@ -1,5 +1,5 @@
 import axios from 'axios'
-export const FETCH_CART = 'FETCH_CART'
+export const SET_CART = 'SET_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const ADD_CART_ITEM = 'ADD_CART_ITEM'
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
@@ -20,12 +20,12 @@ export const logIn = user => async (dispatch, getState) => {
 		})
 }
 
-export const fetchCart = (_id) => async (dispatch, getState) => {
+export const fetchCart = ()  => async (dispatch, getState) => {
 	await axios
-		.get('http://localhost:8080/users/cart', _id)
+		.get('http://localhost:8080/users/cart')
 		.then(res => {
 			dispatch({
-				type: FETCH_CART,
+				type: SET_CART,
 				payload: res,
 			})
 		})
@@ -34,9 +34,13 @@ export const fetchCart = (_id) => async (dispatch, getState) => {
 		})
 }
 
-export const addToCart = (productId, user) => async (dispatch, getState) => {
+export const addToCart = productId => async (dispatch, getState) => {
 	await axios
-		.post('http://localhost:8080/users/cart', { productId, user })
+		.post(
+			'http://localhost:8080/users/cart',
+			{ productId },
+			{ withCredentials: true }
+		)
 		.then(res => {
 			dispatch({
 				type: ADD_TO_CART,

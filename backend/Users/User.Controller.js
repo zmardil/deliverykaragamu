@@ -1,4 +1,4 @@
-const mongoose = require('../DBSchema/SchemaMapper')
+const mongoose = require('../db/schema')
 const Users = mongoose.model('users')
 const passport = require('passport')
 
@@ -113,23 +113,29 @@ var UsersController = function () {
 
 	// cart
 	this.addToCart = (req, res) => {
-		const { productId, user } = req.body
-		Users.findByIdAndUpdate(user._id, {
-			$push: { cart: { _id: productId, qty: 1 } },
-		})
-			.then(data => {
-				res.status(200).json(data.cart)
+		console.log(req.user)
+		const { productId } = req.body
+		if (req.user) {
+			Users.findByIdAndUpdate(req.user._id, {
+				$push: { cart: { _id: productId, qty: 1 } },
 			})
-			.catch()
+				.then(data => {
+					res.status(200).json(data.cart)
+				})
+				.catch(err => res.status(400).json(err))
+		} else {
+			res.status(400)
+		}
 	}
 
 	this.getCart = (req, res) => {
-		Users.findById(req.body._id)
-			.then(user => {
-				res.status(200).send(user.cart)
-			})
-			.catch(err => {
-				res.send(err)
+		console.log(req.user)
+		Users.findOne({ email: req.user.email })
+			.populate('cart._id')
+			.exec(function (err, data) {
+				console.log(data)
+				if (err) return res.status(400).json({ msg: 'empty cart' })
+				res.status(200).json(data.cart)
 			})
 	}
 }

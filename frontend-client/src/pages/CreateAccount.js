@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './CreateAccount.scss'
 
-function CreateAccount() {
+function CreateAccount({ history }) {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const handleSubmit = e => {
@@ -14,7 +14,7 @@ function CreateAccount() {
 				{ email, password },
 				{ withCredentials: true }
 			)
-			.then(obj => alert('success'))
+			.then(obj => history.push('/archive'))
 	}
 
 	return (

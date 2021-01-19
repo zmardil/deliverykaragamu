@@ -1,4 +1,4 @@
-const mongoose = require('../DBSchema/SchemaMapper')
+const mongoose = require('../db/schema')
 const Products = mongoose.model('products')
 
 var ProductController = function () {
