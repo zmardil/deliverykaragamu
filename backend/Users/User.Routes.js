@@ -16,6 +16,17 @@ router.post('/', (req, res) => {
 		})
 })
 
+router.post('/admin/login', (req, res) => {
+	console.log(req.body)
+	UsersController.retrieveByEmailPw(req.body)
+		.then(data => {
+			res.status(data.status).send(data.message)
+		})
+		.catch(err => {
+			res.status(err.status).send(err.message)
+		})
+})
+
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', (err, user) => {
 		if (err) return next(err)

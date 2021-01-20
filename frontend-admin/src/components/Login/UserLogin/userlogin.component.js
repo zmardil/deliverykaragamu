@@ -45,15 +45,15 @@ export default class UserLogin extends Component {
 			}
 
 			axios
-				.post('http://localhost:8080/users/login', loginDetails, config)
+				.post('http://localhost:8080/users/admin/login', loginDetails, config)
 				.then(({ data }) => {
 					loginResponse = data
 					console.log(data)
-					localStorage.setItem('userType', loginResponse[0].type)
-					localStorage.setItem('userName', loginResponse[0].firstName)
-					localStorage.setItem('userId', loginResponse[0]._id)
+					// localStorage.setItem('userType', loginResponse[0].type)
+					// localStorage.setItem('userName', loginResponse[0].firstName)
+					// localStorage.setItem('userId', loginResponse[0]._id)
 
-					if (loginResponse[0].type == 'admin') {
+					if (data.type == 'admin') {
 						window.location.replace('/inventory')
 					} else {
 						window.location.replace('/items')

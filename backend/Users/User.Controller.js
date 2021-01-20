@@ -52,6 +52,16 @@ var UsersController = function () {
 		})
 	}
 
+    this.retrieveByEmailPw=(data)=>{
+        return new Promise((resolve,reject)=>{
+            Users.find({email:data.email,password:data.pw}).then((data)=>{
+                resolve({status:200,message:data});
+            }).catch((err)=>{
+                reject({status:500,message:'No data to be found. Error: '+err});
+            })
+        });
+    };
+
 	// this.login = data => {
 	// 	return new Promise((resolve, reject) => {
 	// 		passport.authenticate('local', (err, user, info) => {

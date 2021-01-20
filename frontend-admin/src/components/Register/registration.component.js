@@ -71,7 +71,7 @@ export default class UserRegistration extends Component {
 			console.log(user)
 
 			axios
-				.post('/users/', user)
+				.post('http://localhost:8080/users/', user)
 				.then(({ data }) => {
 					console.log(data)
 					window.location = '/userLogin'
